@@ -1,0 +1,145 @@
+*{
+    padding:0;
+    margin:0;
+}
+.header-box {
+    width: 100%;
+    height: 50px;
+    background: #2e8afb;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.header-box-left {
+    width: 50%;
+    line-height: 50px;
+    box-sizing: border-box;
+    padding-left: 150px;
+    font-size: 18px;
+    font-family: MicrosoftYaHei;
+    color: #ffffff;
+}
+.header-box-right {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 18px;
+    font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;
+    color: #ffffff;
+    line-height: 50px;
+}
+.header-box-right-shopping {
+    width: 100px;
+    position: relative;
+    right: 200px;
+    cursor: pointer;
+}
+.header-box-right-shopping>img {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 16px;
+    left: -30px;
+}
+.header-box-right-shopping>label {
+    cursor: pointer;
+}
+.header-box-right-manag {
+    position: relative;
+    right: 160px;
+    cursor: pointer;
+}
+.header-box-right-manag>img {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 16px;
+    left: -30px;
+}
+.header-box-right-manag>label {
+    cursor: pointer;
+}
+
+.log {
+    width: 100%;
+    height: 100px;
+    background: #fff;
+}
+.log-box {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.log-box-left {
+    height: 6.25rem;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+.log-box-right {
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+.log-box-right-search {
+    width: 500px;
+    height: 40px;
+    background: #ffffff;
+    border: 1px solid #2e8afb;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.log-box-right-search-input {
+    width: 450px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding-left: 5%;
+}
+.log-box-right-search-input>input {
+    font-size: 16px;
+    font-family: MicrosoftYaHei;
+    width: 90%;
+    outline: none;
+    border: none;
+}
+.log-box-right-search-icon {
+    width: 50px;
+    height: 40px;
+    background: #2e8afb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.log-box-right-search-icon>img {
+    width: 36px;
+    height: 36px;
+}
+.log-box-right-shoppingbtn {
+    width: 160px;
+    height: 40px;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    font-size: 16px;
+    font-family: MicrosoftYaHei;
+    color: #2e8afb;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    position: relative;
+}
+.log-box-right-shoppingbtn>label {
+    margin-right: 35px;
+    cursor: pointer;
+}
+.log-box-right-shoppingbtn>img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+}

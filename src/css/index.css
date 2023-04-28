@@ -1,0 +1,94 @@
+[v-cloak]{
+    display: none;
+}
+
+iframe{
+    width: 100%;
+    height: 50px;
+    border: 0;
+}
+
+/* 底部区域样式 */
+.footer {
+    width: 100%;
+    height: 300px;
+    background: url('../image/7.jpg') no-repeat;
+}
+
+.footer-top {
+    width: calc(100% - 60px);
+    height: 250px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.footer-top-left,
+.footer-top-center {
+    width: 40%;
+}
+
+.footer-top-left>ul,
+.footer-top-center>ul {
+    list-style-type: none;
+    font-size: 14px;
+    font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;
+    color: #ffffff;
+}
+
+.footer-top-left>ul>li,
+.footer-top-center>ul>li {
+    line-height: 30px;
+
+}
+.footer-top-left>ul>li:nth-child(1),
+.footer-top-center>ul>li:nth-child(1) {
+    line-height: 50px;
+
+}
+
+.footer-top-left>ul>li>a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+
+
+.footer-top-right {
+    width: 20%;
+    position: relative;
+
+}
+
+.footer-top-right>ul {
+    list-style-type: none;
+    font-size: 14px;
+    font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;
+    color: #ffffff;
+    position: absolute;
+    right: 0;
+
+
+}
+
+.footer-top-right>ul>li {
+    line-height: 30px;
+}
+
+.footer-top-right>ul>li:nth-child(1) {
+    line-height: 50px;
+    margin-top: 20px;
+}
+
+.footer-bottom {
+    width: 100%;
+    height: 50px;
+    margin: 0 auto;
+    border-top: 1px solid rgb(117, 134, 161);
+    text-align: center;
+    line-height: 50px;
+    font-size: 14px;
+    font-family: MicrosoftYaHei-Bold, MicrosoftYaHei;
+    color: #ffffff;
+}
