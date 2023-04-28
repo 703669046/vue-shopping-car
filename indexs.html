@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>商城</title>
+    <link href="./src/css/header.css" rel="stylesheet">
+    <link href="./src/css/nav.css" rel="stylesheet">
+    <link href="./src/css/main.css" rel="stylesheet">
+    <link href="./src/css/index.css" rel="stylesheet">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script type="text/javascript" src="./src/vue.min.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <script type="text/javascript" src="./src/index.js"></script>
+</head>
+
+<body>
+<div id="app" v-cloak>
+    <!-- 头部 -->
+    <header class="header-box">
+        <div class="header-box-left">{{ date }}</div>
+        <div class="header-box-right">
+            <div v-if="userName === ''" class="header-box-right-shopping" @click="toLogin(0)">
+                <img src="./src/image/2.png" />
+                <label>登录商城</label>
+            </div>
+            <div v-else class="header-box-right-shopping">
+                <img src="./src/image/2.png" />
+                <label>{{ userName }}</label>
+            </div>
+            <div class="header-box-right-manag" @click="toLogin(1)">
+                <img src="./src/image/1.png" />
+                <lable>后台管理</lable>
+            </div>
+        </div>
+    </header>
+    <!-- 主体 -->
+    <main class="main">
+        <div class="main-shoppingCart"  @click="handleOpenShoppngCar">
+            <span>{{shoppingTotal}}</span>
+            <img src="./src/image/shoppingcart.png" />
+        </div>
+        <div class="main-box">
+            <div class="main-box-product">
+                <div class="main-box-product-top">
+                    <div class="main-box-product-top-title">商品信息</div>
+                    <div>
+                        <img src="./src/image/export.png" />
+                    </div>
+                </div>
+                <div class="main-box-product-commodity">
+                    <div class="main-box-product-commodity-item" v-for="(item, index) in airconditionList" :key="index">
+                        <div class="main-box-product-commodity-item-img">
+                            <img :src="item.filePath"/>
+                        </div>
+                        <div class="main-box-product-commodity-item-title">
+                            {{ item.goodsName }}
+                        </div>
+<!--                        <div class="main-box-product-commodity-item-oldprice">-->
+<!--                            市场价格：¥{{ item.oldpirce }}-->
+<!--                        </div>-->
+                        <div class="main-box-product-commodity-item-newprice">
+                            <div class="main-box-product-commodity-item-newprice-title">
+                                市场价 ¥<span>{{ item.price }}</span>
+                            </div>
+                            <div @click="toPurchase(item)" class="main-box-product-commodity-item-newprice-shoppingcart">
+                                <img src="./src/image/shoppingcart.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <el-drawer
+                title="我的购物车"
+                :visible.sync="shoppingState"
+                direction="rtl"
+                class="shopping-drawer"
+                size="60%">
+            <h3 class="shopping-drawer-title">全部商品（{{shoppingTotal}}）</h3>
+            <el-table class="" height="84%" :data="shoppingCarList" ref="shoppingCar" :header-cell-style="{'background': '#EBEEF5'}" @selection-change="handleSelectionChange">
+                <el-table-column type="selection" width="55" label="全选">
+                </el-table-column>
+                <el-table-column property="goodsName" label="商品名称" align="center" width="300px">
+                    <template slot-scope="scope">
+                        <div class="shopping-car-item-name-box">
+                            <div class="shopping-car-item-name-box-img">
+                                <el-image v-if="scope.row.filePath" style="width: 100px; height: 100px" :src="location.origin + '/' + scope.row.filePath" :fit="fit"></el-image>
+                                <el-image v-else></el-image>
+                            </div>
+                            <div class="shopping-car-item-name-box-name">{{scope.row.goodsName}}</div>
+                        </div>
+
+                    </template>
+                </el-table-column>
+                <el-table-column property="specification" label="规格参数" align="center"></el-table-column>
+                <el-table-column property="address" label="数量" align="center" width="150px">
+                    <template slot-scope="scope">
+                        <div>
+<!--                            <el-input-number v-model="shoppingCarList[scope.$index].total" size="mini" @change="changeTotal(event)" :id-index="scope.$index" :min="1"></el-input-number>-->
+                            <el-input placeholder="请输入内容" size="mini" @input="handleInput(scope.$index)" v-model="shoppingCarList[scope.$index].total" id="count-id" class="input-with-select">
+
+                                <el-button slot="prepend" icon="el-icon-minus" @click="handleTotalSubtract(scope.$index)"></el-button>
+                                <el-button slot="append" icon="el-icon-plus" @click="handleTotalAdd(scope.$index)"></el-button>
+                            </el-input>
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作" align="center">
+                    <template slot-scope="scope">
+                        <el-button type="text" @click="handleDelGoods(scope.$index)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <div class="main-drawer-bottom">
+                <div class="main-drawer-bottom-left">
+                    <div class="main-drawer-bottom-left-select"><el-checkbox v-model="checkedShoppingCar" @change="changeSelect" >全选</el-checkbox></div>
+                    <el-button type="text" class="main-drawer-bottom-left-del" @click="handleDelGoodsSelect()">删除选中的商品</el-button>
+                </div>
+
+                <div class="main-drawer-bottom-right">
+                    <div class="main-drawer-bottom-right-subTitle">已选择<span class="main-drawer-bottom-right-selectGoodCount">{{checkGoodCount}}</span>件商品</div>
+                    <div class="main-drawer-bottom-right-gotoPay" @click="handleGoToPay">去下单</div>
+                </div>
+            </div>
+        </el-drawer>
+    </main>
+    <!-- 底部信息 -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-top-left">
+                <ul>
+                    <li>相关链接</li>
+                    <li><a href="http://www.baidu.com">http://www.baidu.com</a></li>
+                    <li><a href="http://www.jd.com">http://www.jd.com</a></li>
+                    <li><a href="http://www.taobao.com">http://www.taobao.com</a></li>
+                    <li><a href="http://www.tianmao.com">http://www.tianmao.com</a></li>
+                </ul>
+            </div>
+            <div class="footer-top-center">
+                <ul>
+                    
+                </ul>
+            </div>
+            <div class="footer-top-right">
+                <ul>
+<!--                    <li>关注我们</li>-->
+<!--                    <li><img src="./src/image/8.png" /></li>-->
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            
+        </div>
+    </footer>
+</div>
+</body>
+
+</html>
